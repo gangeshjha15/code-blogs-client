@@ -5,13 +5,17 @@ import imageFile from '../../contact_banner.png';
 
 
 const Image = styled("img")({
-    width:"100%",
+    width:"100vw",
     height:"50Vh",
     objectFit: "cover",
     display:"flex",
     alignItems: "center",
-    // justify-content: center;
-    flexDirection: "column" 
+    flexDirection: "column",
+    '@media (max-width: 600px)' : {
+      objectFit: "fill",
+      height:"40Vh",
+    }
+  
   })
 
 const Wrapper = styled(Box)`

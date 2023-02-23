@@ -10,16 +10,14 @@ import Posts from "./post/Posts";
 import TestCategories from "./TestCategories";
 
 const StyledFab = styled(Fab)`
-  background: #C780FA;
+  background: #c780fa;
   color: #fff;
   &:hover {
-    background: #A459D1;
+    background: #a459d1;
   }
 `;
 
-
 const TestHome = () => {
-
   return (
     <Box style={{ position: "relative" }}>
       <Banner />
@@ -27,9 +25,18 @@ const TestHome = () => {
       <Box sx={{ width: "100%" }}>
         <TestCategories />
       </Box>
-      <Grid container item lg={12} sm={12} xs={12} style={{background: "#F5EAEA"}}>
-        <Posts />
-      </Grid>
+      <Box>
+        <Grid
+          container
+          item
+          lg={12}
+          sm={12}
+          xs={12}
+          // style={{ background: "#F5EAEA" }}
+        >
+          <Posts />
+        </Grid>
+      </Box>
       <Link to={`/create`} style={{ textDecoration: "none" }}>
         <StyledFab
           color="primary"

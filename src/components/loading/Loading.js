@@ -1,12 +1,38 @@
 import React from "react";
-import "./spinner.css";
-import loading from "../../loading_gif.gif";
+import "./Loading.css";
 
 export default function Loading() {
   return (
-    <div className="spinner-container">
-      <div className="loading-spinner">
-        <img src={loading} alt="Loading..."/>
+    <div class="loader-container">
+      <div class="loader-grid">
+        <div class="loader-item">
+          <div class="loader-image"></div>
+          <div class="loader-category"></div>
+          <div class="loader-title"></div>
+          <div class="loader-name"></div>
+          <div class="loader-description"></div>
+        </div>
+        <div class="loader-item">
+          <div class="loader-image"></div>
+          <div class="loader-category"></div>
+          <div class="loader-title"></div>
+          <div class="loader-name"></div>
+          <div class="loader-description"></div>
+        </div>
+        <div class="loader-item">
+          <div class="loader-image"></div>
+          <div class="loader-category"></div>
+          <div class="loader-title"></div>
+          <div class="loader-name"></div>
+          <div class="loader-description"></div>
+        </div>
+        <div class="loader-item">
+          <div class="loader-image"></div>
+          <div class="loader-category"></div>
+          <div class="loader-title"></div>
+          <div class="loader-name"></div>
+          <div class="loader-description"></div>
+        </div>
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 // import { DataContext } from "../../context/DataProvider";
 import { API } from "../../service/api";
 import { top20Categories } from "../../constants/data";
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 
 import { toast } from "react-toastify";
 
@@ -188,11 +188,10 @@ const CreatePost = () => {
           onInputChange={(event, newValue) => {
             setPost({ ...post, category: newValue });
           }}
-          style={{ marginTop: "20px", width: "20vw" }}
+          style={{ marginTop: "20px"}}
           disablePortal
           id="combo-box-demo"
           options={top20Categories}
-          sx={{ width: 300 }}
           renderInput={(params) => (
             <TextField {...params} label="Choose Categories" />
           )}

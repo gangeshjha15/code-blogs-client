@@ -4,29 +4,19 @@ import imageFile from '../../blogger_logo.png';
 
 // background: url(https://img.freepik.com/premium-photo/woman-works-office-blue-background-concept-workspace-working-computer-freelance-banner_164357-1144.jpg?w=2000) center/100% repeat-x;
 const Image = styled("img")({
-  width:"100%",
+  width:"100vw",
   height:"50Vh",
   objectFit: "cover",
   display:"flex",
   alignItems: "center",
-  flexDirection: "column"
+  flexDirection: "column",
+  '@media (max-width: 600px)' : {
+    objectFit: "fill",
+    height:"40Vh",
+  }
 
 })
 
-
-
-// const Heading = styled(Typography)`
-//     font-size: 70px;
-//     color: #fff;
-//     line-height: 1;
-//     font-weight:600;
-// `;
-
-// const SubHeading =  styled(Typography)`
-//     background:#b2e8fa;
-//     font-size:20px;
-//     color:#fff;
-// `;
 
 
 const Banner = () => {

@@ -16,6 +16,7 @@ import Profile from "./components/profile/Profile";
 
 import { Provider } from "react-redux";
 import store from "./store/store";
+import UserPosts from "./components/home/userPosts/UserPosts";
 
   const PrivateRoute = ({isUserAuth})=>{
     return isUserAuth?
@@ -44,6 +45,10 @@ function App() {
 
             <Route path="/create" element={<PrivateRoute isUserAuth={isUserAuth}/>} >
               <Route path="/create" element={<CreatePost />} />
+            </Route>
+
+            <Route path="/user/posts" element={<PrivateRoute isUserAuth={isUserAuth}/>} >
+              <Route path="/user/posts" element={<UserPosts/>} />
             </Route>
 
             <Route path="/details/:id" element={<DetailView/>} />

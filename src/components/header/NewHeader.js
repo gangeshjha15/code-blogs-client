@@ -7,6 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Logo from "../../code_blogger_logo.png";
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
+import ArticleIcon from '@mui/icons-material/Article';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import {
   Container,
@@ -43,15 +44,7 @@ const WithoutLoginButton = styled(Button)`
   }
 `;
 
-const StyleBox = styled(Box)`
-  // float: right;
-`;
-
 const drawerWidth = 200;
-
-const MenuButton = styled(IconButton)`
-  // margin-right: 2px;
-`;
 
 const NewHeader = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -129,46 +122,28 @@ const NewHeader = () => {
       icon: <ContactPageIcon/>,
       to: "/contact"
     },
+    {
+      text: "Your Blogs",
+      icon: <ArticleIcon/>,
+      to: "/user/posts"
+    },
   ];
 
-  // const drawerItems = (
-  //   <div>
-  //     <List>
-  //       <ListItem component="a" href={<TestHome/>}>
-  //         <ListItemText primary="Home" />
-  //       </ListItem>
-  //       <ListItem>
-  //         <ListItemText primary="About" />
-  //       </ListItem>
-  //       <ListItem>
-  //         <ListItemText primary="Contact" />
-  //       </ListItem>
-  //       <ListItem>
-  //         <ListItemText primary="Settings" />
-  //       </ListItem>
-  //     </List>
-  //     <Divider />
-  //     <List>
-  //       <ListItem>
-  //         <ListItemText primary="Logout" />
-  //       </ListItem>
-  //     </List>
-  //   </div>
-  // );
+
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{ overflow: "hidden" , background: "#A459D1"}}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <MenuButton
+            <IconButton
               edge="start"
               color="inherit"
               aria-label="menu"
               onClick={toggleDrawer}
             >
               <MenuIcon />
-            </MenuButton>
+            </IconButton>
             <Drawer
               variant="temporary"
               sx={{
@@ -188,7 +163,7 @@ const NewHeader = () => {
                 {drawerItems.map((item) => {
                   const { text, icon, to } = item;
                   return (
-                    <ListItemButton component={Link} to={to} key={text}>
+                    <ListItemButton component={Link} to={to} key={text} onClick={toggleDrawer}>
                       {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
                       <ListItemText primary={text} style={{ color: "black" }} />
                     </ListItemButton>
@@ -201,7 +176,7 @@ const NewHeader = () => {
             </Box>
             <Box>
               {sessionStorage.getItem("accessToken") ? (
-                <StyleBox>
+                <Box>
                   <IconButton
                     id="basic-button"
                     size="small"
@@ -284,7 +259,7 @@ const NewHeader = () => {
                       </MenuItem>
                     </Link>
                   </Menu>
-                </StyleBox>
+                </Box>
               ) : (
                 <WithoutLoginButton variant="text" onClick={navigateLogin}>
                   Login

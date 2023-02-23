@@ -1,0 +1,151 @@
+.loader-container {
+    width: 100%;
+    margin: 20px;
+  }
+  
+  .loader-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+  }
+  
+  .loader-item {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .loader-image {
+    height: 150px;
+    background-color: #ddd;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  .loader-category {
+    height: 15px;
+    width: 80px;
+    background-color: #ddd;
+    margin: 10px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  .loader-title {
+    height: 20px;
+    width: 150px;
+    background-color: #ddd;
+    margin: 10px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  .loader-name {
+    height: 15px;
+    width: 100px;
+    background-color: #ddd;
+    margin: 10px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  .loader-description {
+    height: 20px;
+    width: 200px;
+    background-color: #ddd;
+    margin: 10px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      opacity: 0.4;
+    }
+    20% {
+      opacity: 0.8;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    60% {
+      opacity: 0.8;
+    }
+    80% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 0.4;
+    }
+  }
+  
+  @media screen and (min-width: 600px) and (max-width: 1200px) {
+    .loader-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  
+    .loader-item {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    
+    .loader-image {
+      height: 150px;
+    }
+    
+    .loader-category {
+      height: 10px;
+      width: 60px;
+      margin: 5px;
+    }
+  
+    .loader-title {
+      height: 15px;
+      width: 120px;
+      margin: 5px;
+    }
+  
+    .loader-name {
+      height: 10px;
+      width: 80px;
+      margin: 5px;
+    }
+  
+    .loader-description {
+      height: 30px;
+      width: 150px;
+      margin: 5px;
+    }
+  }
+  
+  @media screen and (max-width: 599px) {
+    .loader-grid {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+
+    .loader-image {
+      height: 120px;
+    }
+    
+    .loader-category {
+      height: 8px;
+      width: 40px;
+      margin: 3px;
+    }
+  
+    .loader-title {
+      height: 12px;
+      width: 100px;
+      margin: 3px;
+    }
+  
+    .loader-name {
+      height: 8px;
+      width: 60px;
+      margin: 3px;
+    }
+  
+    .loader-description {
+      height: 20px;
+      width: 120px;
+      margin: 3px;
+    }
+  }
+  

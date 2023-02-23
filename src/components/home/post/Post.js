@@ -43,7 +43,8 @@ const Post = ({post}) => {
         <Text>{post.category}</Text>
         <Heading>{addElipsis(post.title, 25)}</Heading>
         <Text>{post.name}</Text>
-        <Details>{addElipsis(post.description, 60)}</Details>
+        {/* <Details noWrap>{addElipsis(post.description, 60)}</Details> */}
+        <Details noWrap>{post.description}</Details>
     </Container>
   )
 }

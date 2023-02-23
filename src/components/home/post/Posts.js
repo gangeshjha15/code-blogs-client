@@ -41,7 +41,7 @@ const Posts = () => {
         </Grid>
         )
       ) : (
-        <Box style={{ color: "#878787", margin: "30px 80px", fontSize: 38 }}>
+        <Box style={{ color: "#878787", margin: "10px auto", fontSize: 38}}>
           Nothing to display!
         </Box>
       )}

@@ -37,6 +37,8 @@ export const SERVICE_URLS = {
     createPost: {url: '/create', method: 'POST'},
     //Get all posts
     getAllPosts: {url:'/posts', method: 'GET', query: true},
+    //Get User all posts
+    getUserPosts: {url:'/posts', method: 'GET', params: true},
     //Get post by id
     getPostById: {url: '/post', method: 'GET', params: true},
     //Update post

@@ -46,7 +46,7 @@ const WithoutLoginButton = styled(Button)`
 
 const drawerWidth = 200;
 
-const NewHeader = () => {
+const NewHeader = ({setIsUserAuth, isUserAuth}) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -57,6 +57,7 @@ const NewHeader = () => {
   const logoutHandle = () => {
     sessionStorage.removeItem("accessToken");
     sessionStorage.removeItem("refreshToken");
+    setIsUserAuth(false);
   };
 
   const toggleDrawer = () => {
@@ -133,7 +134,7 @@ const NewHeader = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ overflow: "hidden" , background: "#A459D1"}}>
+      <AppBar position="fixed" style={{ overflow: "hidden" , background: "#A459D1"}}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <IconButton
@@ -175,7 +176,7 @@ const NewHeader = () => {
               <Image src={Logo} alt="Logo" />
             </Box>
             <Box>
-              {sessionStorage.getItem("accessToken") ? (
+              {sessionStorage.getItem("accessToken") && isUserAuth ? (
                 <Box>
                   <IconButton
                     id="basic-button"

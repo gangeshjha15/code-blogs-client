@@ -54,5 +54,9 @@ export const SERVICE_URLS = {
     //Add Like
     likePost: {url:'/like', method:'PUT'},
     //Add Like
-    disLikePost: {url:'/dislike', method:'PUT'}
+    disLikePost: {url:'/dislike', method:'PUT'},
+    //sending mail
+    emailSend: {url: '/email-send', method: 'POST'},
+    //changing password
+    changePassword: {url: '/change-password', method: 'POST'}
 }

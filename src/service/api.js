@@ -7,7 +7,6 @@ import store from "../store/store";
 // const API_URL = "http://localhost:8000/api";
 const API_URL = "https://code-blogs-backend.onrender.com/api";
 
-// const dispatch = useDispatch();
 
 const axiosInstance = axios.create({
   baseURL: API_URL,

@@ -26,7 +26,10 @@ const UserPost = () => {
 
   if (isLoading) {
     return (
-      <Box>
+      <Box sx={{
+        marginTop: "80px",
+        marginRight: "40px"
+      }}>
         <Loading />
       </Box>
     );
@@ -36,6 +39,7 @@ const UserPost = () => {
       display: 'grid',
       columnGap: 2,
       gridTemplateColumns: 'repeat(12, 1fr)',
+      marginTop: "60px"
     }}>
       {posts && posts.length > 0 ? (
         posts.map((post) => (

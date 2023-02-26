@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   TextField,
@@ -26,7 +26,51 @@ export const ForgetPassword = () => {
     password: "",
   });
   const [isChangePass, setIsChangePass] = useState(false);
-  const [error, setError] = useState("");
+  const [minutes, setMinutes] = useState(4);
+  const [seconds, setSeconds] = useState(59);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
+      }
+
+      if (seconds === 0) {
+        if (minutes === 0) {
+          clearInterval(interval);
+        } else {
+          setSeconds(59);
+          setMinutes(minutes - 1);
+        }
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  });
+
+  const resendOTP = async() => {
+    setMinutes(4);
+    setSeconds(59);
+    try {
+      let res = await API.emailSend({ email });
+      console.log(res.status);
+      if (res.isSuccess) {
+        toast.success("OTP has been sent to your Email Id!");
+        setIsChangePass(true);
+      }
+    } catch (error) {
+      if (error.code === 400) {
+        toast.warning("This Email is not registered with us!");
+      } else {
+        toast.error("Internal server error");
+      }
+    }
+  };
+
+
+  // const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const valueChange = (e) => {
@@ -54,7 +98,7 @@ export const ForgetPassword = () => {
       }
     } catch (error) {
       if (error.code === 400) {
-        toast.success("This Email is not registered with us!");
+        toast.warning("This Email is not registered with us!");
       } else {
         toast.error("Internal server error");
       }
@@ -86,18 +130,7 @@ export const ForgetPassword = () => {
       {!isChangePass ? (
         <Grid container component="main" justifyContent="center">
           <Grid
-            item
-            xs={12}
-            sm={8}
-            md={5}
-            component={Box}
-            mt={8}
-            mb={8}
-            pl={12}
-            pr={12}
-            pt={4}
-            pb={4}
-            boxShadow={3}
+            item xs={12} sm={8} md={5} component={Box}mt={8} mb={8} pl={12} pr={12} pt={4} pb={4} boxShadow={3}
             sx={{ background: "#F5EAEA", borderRadius: "5px" }}
           >
             <Typography component="h1" variant="h5" align="center">
@@ -138,39 +171,52 @@ export const ForgetPassword = () => {
         </Grid>
       ) : (
         <Grid container component="main" justifyContent="center">
-          <Grid
-            item
-            xs={12}
-            sm={8}
-            md={5}
-            component={Box}
-            mt={8}
-            mb={8}
-            pl={12}
-            pr={12}
-            pt={4}
-            pb={4}
-            boxShadow={3}
+          <Grid item xs={12} sm={8} md={5} component={Box}mt={8} mb={8} pl={12} pr={12} pt={4} pb={4} boxShadow={3}
             sx={{ background: "#F5EAEA", borderRadius: "5px" }}
           >
             <Typography component="h1" variant="h5" align="center">
               Reset Password
             </Typography>
             <StyledForm onSubmit={handleChangePass}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                autoFocus
-                id="otpcode"
-                label="OTP Code"
-                name="otpcode"
-                autoComplete="otpcode"
-                sx={{ background: "#fff" }}
-                value={details.otpcode}
-                onChange={(e) => valueChange(e)}
-              />
+              <div style={{display: "flex"}}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  autoFocus
+                  id="otpcode"
+                  label="OTP Code"
+                  name="otpcode"
+                  autoComplete="otpcode"
+                  sx={{ background: "#fff" }}
+                  value={details.otpcode}
+                  onChange={(e) => valueChange(e)}
+                />
+                <div style={{margin: "auto"}}>
+                  {seconds > 0 || minutes > 0 ? (
+                    <Typography sx={{color: "#04aa6d"}}>
+                      {minutes < 10 ? `0${minutes}` : minutes}:
+                      {seconds < 10 ? `0${seconds}` : seconds}
+                    </Typography>
+                  ) : (
+                    <Typography sx={{color: "#635985"}}>{minutes < 10 ? `0${minutes}` : minutes}:
+                    {seconds < 10 ? `0${seconds}` : seconds}</Typography>
+                  )}
+
+                </div>
+
+              </div>
+              <Button
+                  variant="contained"
+                  disabled={seconds > 0 || minutes > 0}
+                  style={{
+                    background: seconds > 0 || minutes > 0 ? "#e7e9eb" : "#04aa6d",
+                    color: "#fff",
+                  }}
+                  onClick={resendOTP}
+                >
+                  Resend OTP
+              </Button>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -179,6 +225,7 @@ export const ForgetPassword = () => {
                 id="password"
                 label="Password"
                 name="password"
+                type="password"
                 autoComplete="password"
                 sx={{ background: "#fff" }}
                 value={details.password}
@@ -192,12 +239,13 @@ export const ForgetPassword = () => {
                 id="cnfpassword"
                 label="Confirm Password"
                 name="cnfpassword"
+                type="password"
                 autoComplete="cnfpassword"
                 sx={{ background: "#fff" }}
                 value={cnfPassword}
                 onChange={(e) => handleCnfPassword(e)}
               />
-              <Typography color="red">{error}</Typography>
+              {/* <Typography color="red">{error}</Typography> */}
               <Button
                 type="submit"
                 variant="contained"

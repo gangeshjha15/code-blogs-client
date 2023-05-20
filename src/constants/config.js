@@ -58,5 +58,13 @@ export const SERVICE_URLS = {
     //sending mail
     emailSend: {url: '/email-send', method: 'POST'},
     //changing password
-    changePassword: {url: '/change-password', method: 'POST'}
+    changePassword: {url: '/change-password', method: 'POST'},
+    //bookmark blog
+    bookmarkBlog: {url: '/save-blog', method: 'POST'},
+    //remove bookmark blog
+    remBookmarkBlog: {url: '/remove-blog', method: 'POST'},
+    //get bookmarked posts
+    getBookmarkedPosts: {url: '/bookmark-blogs', method: 'GET', params: true},
+    //get All bookmarked posts
+    getAllBookmarkedPosts: {url: '/all-bookmark-blogs', method: 'GET', params: true},
 }

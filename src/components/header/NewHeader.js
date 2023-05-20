@@ -7,6 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Logo from "../../code_blogger_logo.png";
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ArticleIcon from '@mui/icons-material/Article';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import {
@@ -128,6 +129,11 @@ const NewHeader = ({setIsUserAuth, isUserAuth}) => {
       icon: <ArticleIcon/>,
       to: "/user/posts"
     },
+    {
+      text: "Saved Blogs",
+      icon: <BookmarkIcon/>,
+      to: "/user/get-all-bookmarked-blogs"
+    }
   ];
 
 

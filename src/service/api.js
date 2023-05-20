@@ -10,7 +10,7 @@ const API_URL = "https://code-blogs-backend.onrender.com/api";
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
-  timeout: 10000,
+  timeout: 20000,
 });
 
 

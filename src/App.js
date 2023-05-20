@@ -26,6 +26,7 @@ import store from "./store/store";
 import UserPosts from "./components/home/userPosts/UserPosts";
 import Signup from "./components/account/Signup";
 import { ForgetPassword } from "./components/forgetPassword/ForgetPassword";
+import SavedBlogs from "./components/home/savedBlogs/SavedBlogs";
 
 const PrivateRoute = ({ isUserAuth }) => {
   return isUserAuth ? (
@@ -67,6 +68,14 @@ function App() {
               element={<PrivateRoute isUserAuth={isUserAuth} />}
             >
               <Route path="/user/posts" element={<UserPosts />} />
+            </Route>
+            
+            {/* get All Bookmarked blogs */}
+            <Route
+              path="/user/get-all-bookmarked-blogs"
+              element={<PrivateRoute isUserAuth={isUserAuth} />}
+            >
+              <Route path="/user/get-all-bookmarked-blogs" element={<SavedBlogs />} />
             </Route>
 
             <Route path="/details/:id" element={<DetailView />} />

@@ -1,11 +1,16 @@
 import React from 'react'
-import { Box, Icon, Typography, styled } from '@mui/material'
+import { Box, Typography, styled } from '@mui/material'
 import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
+import TurnedInIcon from '@mui/icons-material/TurnedIn';
 import {
   ThumbUp
 } from "@mui/icons-material";
 import { addElipsis } from '../../../utills/common-utils';
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
+import { Link } from 'react-router-dom';
+// import { API } from "../../../service/api";
+// import { useSelector } from "react-redux";
+
 
 const Container = styled(Box)`
   border: 1px solid #d3cede;
@@ -31,14 +36,8 @@ const Text = styled(Typography)`
   color: #878787;
   font-size: 12px;
 `;
-const TurnedInNot = styled(TurnedInNotIcon)`
-  margin-left: 5px;
-  margin-top: 3px;
-`;
 const Thumb = styled(ThumbUp)`
   float: right;
-  margin-right: 5px;
-  margin-top: 3px;
 `;
 const Heading = styled(Typography)`
   font-size: 18px;
@@ -53,22 +52,42 @@ const LikeCount = styled(Typography)`
   margin-right: 5px;
   margin-top: 3px;
 `;
+const InnerBox = styled(Box)`
+  margin: 7px;
+`;
+const LowerBox = styled(Box)`
+  margin-left: 7px;
+  margin-right: 7px;
+  margin-top: 10px;
+`;
 
 
 const Post = ({post}) => {
+
+  //working on it
+  // const account = useSelector((state) => state.account);
+
   return (
     <Container>
+      <Link to={`details/${post._id}`} style={{textDecoration:'none', color:'inherit'}}>
         <Image src={post.picture} alt="Blog"/>
-        <Text>{post.category}</Text>
-        <Heading>{addElipsis(post.title, 25)}</Heading>
-        <Text>{post.name}</Text>
-        {/* <Details noWrap>{addElipsis(post.description, 60)}</Details> */}
-        <Details noWrap>{post.description}</Details>
-        <Box>
-          <TurnedInNot onClick={()=>toast.success("Post Saved Successfully!")}/>
+        <InnerBox>
+          <Text>{post.category}</Text>
+          <Heading>{addElipsis(post.title, 25)}</Heading>
+          <Text>{post.name}</Text>
+          {/* <Details noWrap>{addElipsis(post.description, 60)}</Details> */}
+          <Details noWrap>{post.description}</Details>
+        </InnerBox>
+      </Link>
+        <LowerBox>
+          { (sessionStorage.getItem("accessToken")) ? 
+            (<TurnedInIcon style={{cursor: 'pointer'}}/>)
+            :
+            (<TurnedInNotIcon style={{cursor: 'pointer'}}/>)
+          }
           <LikeCount>{post.likes ? post.likes.length : ""} likes</LikeCount>
-          <Thumb/>
-        </Box>
+          <Thumb style={{marginRight: '3px'}}/>
+        </LowerBox>
     </Container>
   )
 }

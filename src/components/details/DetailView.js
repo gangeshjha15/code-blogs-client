@@ -8,6 +8,8 @@ import {
   ThumbUp,
   ThumbUpOffAltOutlined,
 } from "@mui/icons-material";
+import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
+import TurnedInIcon from '@mui/icons-material/TurnedIn';
 // import { DataContext } from "../../context/DataProvider";
 import Comments from "./comments/Comments";
 import { useSelector } from "react-redux";
@@ -77,6 +79,19 @@ const Author = styled(Box)`
   margin: 20px 0;
 `;
 
+const BookmarkIcon = styled(TurnedInIcon)`
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #878787;
+  border-radius: 10px;
+`
+const NotBookmarkIcon = styled(TurnedInNotIcon)`
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #878787;
+  border-radius: 10px;
+`
+
 const DetailView = () => {
   const { id } = useParams();
   // const { account } = useContext(DataContext);
@@ -86,6 +101,7 @@ const DetailView = () => {
   const [post, setPost] = useState({});
 
   const [open, setOpen] = useState(false);
+  const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
 
   const handleClose = () => {
     setOpen(false);
@@ -96,6 +112,15 @@ const DetailView = () => {
     ? post.picture
     : "https://img.freepik.com/free-photo/top-view-person-writing-laptop-with-copy-space_23-2148708035.jpg?w=1060&t=st=1667457422~exp=1667458022~hmac=d99773fc3688df34ff41d0ecd396c4f030dae3f5333c69bebeaa3079c38c1d14";
 
+    const getSavedPosts = async() =>{
+      if(sessionStorage.getItem("accessToken")){
+        const res = await API.getBookmarkedPosts(account.id);
+        if(res.isSuccess){
+          setBookmarkedPosts(res.data.blogId);
+        } 
+      }
+    }
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await API.getPostById(id);
@@ -105,6 +130,7 @@ const DetailView = () => {
       }
     };
     fetchData();
+    getSavedPosts();
     // eslint-disable-next-line
   }, []);
 
@@ -115,12 +141,36 @@ const DetailView = () => {
     }
   };
   const disLike = async () => {
-    const res = await API.disLikePost({ postId: post._id });
-    if (res.isSuccess) {
-      // console.log(res.data);
-      setPost(res.data.post);
-    }
+      const res = await API.disLikePost({ postId: post._id });
+      if (res.isSuccess) {
+        // console.log(res.data);
+        setPost(res.data.post);
+        console.log(bookmarkedPosts);
+      }
   };
+
+  const handleSaveBlog = async()=>{
+    if(sessionStorage.getItem("accessToken")){
+      const res = await API.bookmarkBlog({userId: account.id, blogId: post._id});
+      if(res.isSuccess){
+        setBookmarkedPosts( bookmarkedPosts => [...bookmarkedPosts, post._id]);
+        toast.success("Post Saved to Bookmark!");
+      }
+    } else {
+      toast.warning("Please login to your account!")
+    }
+  }
+  const handleRemoveBlog = async()=>{
+    if(sessionStorage.getItem("accessToken")){
+      const res = await API.remBookmarkBlog({userId: account.id, blogId: post._id});
+      if(res.isSuccess){
+        setBookmarkedPosts(bookmarkedPosts.filter(item => item !== post._id));
+        toast.success("Post Removed From Bookmark!");
+      }
+    } else {
+      toast.warning("Please login to your account!")
+    }
+  }
 
   const openDialog = ()=>{
     setOpen(true);
@@ -137,12 +187,12 @@ const DetailView = () => {
     <Container>
       <Image src={url} alt="Profile" />
       <Box style={{ float: "right" }}>
-        {account.email === post.email && (
+        { sessionStorage.getItem("accessToken") && account.email === post.email && (
           <>
             <Link to={`/update/${post._id}`}>
               <EditIcon color="primary" />
             </Link>
-            <DeleteIcon onClick={openDialog} color="error" />
+              <DeleteIcon onClick={openDialog} color="error" />
 
             <Dialog
               open={open}
@@ -173,8 +223,21 @@ const DetailView = () => {
         </Box>
       ) : (
         <Box style={{ float: "left" }}>
-          <OnIcon cursor="pointer" />
+          <OnIcon cursor="pointer" onClick={()=> toast.warning("Please login to your account!")}/>
           <LikeCount>{post.likes ? post.likes.length : ""} likes</LikeCount>
+        </Box>
+      )}
+      {/* bookmarked Posts */}
+      {sessionStorage.getItem("accessToken") ? (
+        <Box style={{ float: "left" }}>
+          {bookmarkedPosts && bookmarkedPosts.includes(post._id) ? (
+          <BookmarkIcon onClick={handleRemoveBlog} style={{cursor: 'pointer'}}/>
+          ) :(
+          <NotBookmarkIcon onClick={handleSaveBlog} style={{cursor: 'pointer'}}/>)}
+        </Box>
+      ) : (
+        <Box style={{ float: "left" }}>
+          <NotBookmarkIcon onClick={handleSaveBlog} style={{cursor: 'pointer'}}/>
         </Box>
       )}
       <Heading>{post.title}</Heading>

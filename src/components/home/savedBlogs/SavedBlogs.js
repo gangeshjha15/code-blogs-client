@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import Loading from "../../loading/Loading";
 import Post from "../post/Post";
 import React, { useState, useEffect } from "react";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { API } from "../../../service/api";
 import { Link } from "react-router-dom";
 import '../../loading/Loading.css'
@@ -36,30 +36,53 @@ const SavedBlogs = () => {
     );
   }
   return (
-    <Box   sx={{
-      display: 'grid',
-      columnGap: 2,
-      gridTemplateColumns: 'repeat(12, 1fr)',
-      marginTop: "60px"
-    }}>
+    <>
+    <Grid container spacing={2} mt={7}>
       {posts && posts.length > 0 ? (
         posts.map((post) => (
-            <Box key={post._id} gridColumn="span 3">
+            <Grid key={post._id} item xs={12} sm={6} md={4} lg={3}>
               <Link
                 to={`/details/${post._id}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <Post post={post} />
               </Link>
-            </Box>
+            </Grid>
         ))
       ) : (
         <Box style={{ color: "#878787", padding: "20px", fontSize: 38 }}>
           Nothing to display!
         </Box>
       )}
-    </Box>
+    </Grid>
+    </>
   );
+    
+  // return (
+  //   <Box   sx={{
+  //     display: 'grid',
+  //     columnGap: 2,
+  //     gridTemplateColumns: 'repeat(12, 1fr)',
+  //     marginTop: "60px"
+  //   }}>
+  //     {posts && posts.length > 0 ? (
+  //       posts.map((post) => (
+  //           <Box key={post._id} gridColumn="span 3">
+  //             <Link
+  //               to={`/details/${post._id}`}
+  //               style={{ textDecoration: "none", color: "inherit" }}
+  //             >
+  //               <Post post={post} />
+  //             </Link>
+  //           </Box>
+  //       ))
+  //     ) : (
+  //       <Box style={{ color: "#878787", padding: "20px", fontSize: 38 }}>
+  //         Nothing to display!
+  //       </Box>
+  //     )}
+  //   </Box>
+  // );
 };
 
 export default SavedBlogs;

@@ -18,13 +18,13 @@ import { toast } from "react-toastify";
 
 const StyledAvatar = styled(Avatar)`
   margin: 8px;
-  background-color: #9c27b0;
+  background-color: #4F46E5;
 `;
 
 const StyledButton = styled(Button)`
-  background: #c780fa;
+  background: #4F46E5;
   &:hover {
-    background: #a459d1;
+    background: #4F46E5;
   }
 `;
 const StyledForm = styled("form")({
@@ -70,16 +70,11 @@ const Signup = () => {
           item
           xs={12}
           sm={8}
-          md={6}
+          md={4}
           component={Box}
-          mt={4}
-          mb={4}
-          pl={12}
-          pr={12}
-          pt={4}
-          pb={4}
-          boxShadow={3}
-          sx={{background: "#F5EAEA", borderRadius: "5px"}}
+          pl={4}
+          pr={4}
+          sx={{background: "#fff"}}
         >
           <Box display="flex" justifyContent="center">
             <StyledAvatar>
@@ -139,10 +134,11 @@ const Signup = () => {
             >
               Sign Up
             </StyledButton>
-            <Grid container>
+            <Grid container style={{marginTop: '10px'}}>
               <Grid item>
+              <span style={{color: 'grey'}}>Already have an account?</span>
                 <Link component={RouterLink} to="/login" variant="body2">
-                  {"Already have an account? Sign In"}
+                  {"Sign In"}
                 </Link>
               </Grid>
             </Grid>

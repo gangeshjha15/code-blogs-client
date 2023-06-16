@@ -16,7 +16,7 @@ const Container = styled(Box)`
   border: 1px solid #d3cede;
   border-radius: 10px;
   margin: 15px ;
-  height: 300px;
+  height: 315px;
   background: #F9F5E7;
   & > p{
     padding: 0 5px 5px 5px;
@@ -25,6 +25,7 @@ const Container = styled(Box)`
   &:hover{
     transform: scale(1.08);
   }
+  
 `;
 
 

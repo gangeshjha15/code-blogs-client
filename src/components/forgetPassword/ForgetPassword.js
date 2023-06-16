@@ -130,8 +130,8 @@ export const ForgetPassword = () => {
       {!isChangePass ? (
         <Grid container component="main" justifyContent="center">
           <Grid
-            item xs={12} sm={8} md={5} component={Box}mt={8} mb={8} pl={12} pr={12} pt={4} pb={4} boxShadow={3}
-            sx={{ background: "#F5EAEA", borderRadius: "5px" }}
+            item xs={12} sm={8} md={5} component={Box}mt={8} mb={8} pl={12} pr={12} pt={4} pb={4}
+            sx={{ background: "#fff" }}
           >
             <Typography component="h1" variant="h5" align="center">
               Reset Password
@@ -171,8 +171,8 @@ export const ForgetPassword = () => {
         </Grid>
       ) : (
         <Grid container component="main" justifyContent="center">
-          <Grid item xs={12} sm={8} md={5} component={Box}mt={8} mb={8} pl={12} pr={12} pt={4} pb={4} boxShadow={3}
-            sx={{ background: "#F5EAEA", borderRadius: "5px" }}
+          <Grid item xs={12} sm={8} md={5} component={Box}mt={8} mb={8} pl={12} pr={12} pt={4} pb={4}
+            sx={{ background: "#fff" }}
           >
             <Typography component="h1" variant="h5" align="center">
               Reset Password

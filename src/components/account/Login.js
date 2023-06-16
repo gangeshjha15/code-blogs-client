@@ -5,8 +5,6 @@ import {
   Avatar,
   Button,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Grid,
   Box,
   Typography,
@@ -22,13 +20,13 @@ import { setUserAccount } from "../../store/accountSlice";
 
 const StyledAvatar = styled(Avatar)`
   margin: 8px;
-  background-color: #9c27b0;
+  background-color: #4F46E5;
 `;
 
 const StyledButton = styled(Button)`
-    background: #F6C171;
+    background: #4F46E5;
     &:hover {
-    background: #E88E06;
+    background: #4F46E5;
     }
 `;
 const StyledForm = styled("form")({
@@ -89,16 +87,11 @@ const Login = ({ setIsUserAuth }) => {
           item
           xs={12}
           sm={8}
-          md={5}
+          md={4}
           component={Box}
-          mt={8}
-          mb={8}
-          pl={12}
-          pr={12}
-          pt={4}
-          pb={4}
-          boxShadow={3}
-          sx={{background: "#F5EAEA", borderRadius: "5px"}}
+          pl={4}
+          pr={4}
+          sx={{background: "#fff"}}
         >
           <Box display="flex" justifyContent="center">
             <StyledAvatar>
@@ -123,6 +116,11 @@ const Login = ({ setIsUserAuth }) => {
               value={login.email}
               onChange={(e) => valueChange(e)}
             />
+            <Grid item xs style={{float: 'right'}}>
+                <Link component={RouterLink} to="/forget-password" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
             <TextField
               variant="outlined"
               margin="normal"
@@ -133,13 +131,9 @@ const Login = ({ setIsUserAuth }) => {
               type="password"
               id="password"
               autoComplete="current-password"
-              sx={{background: "#fff"}}
+              sx={{marginBottom: "20px", background: "#fff"}}
               value={login.password}
               onChange={(e) => valueChange(e)}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <StyledButton
               type="submit"
@@ -150,14 +144,11 @@ const Login = ({ setIsUserAuth }) => {
               Sign In
             </StyledButton>
             <Grid container>
-              <Grid item xs>
-                <Link component={RouterLink} to="/forget-password" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
+              
+              <Grid item style={{marginTop: '10px'}}>
+                <span style={{color: 'grey'}}>Don't have an account?</span>
                 <Link component={RouterLink} to="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {"Sign Up"}
                 </Link>
               </Grid>
             </Grid>

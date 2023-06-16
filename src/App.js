@@ -63,6 +63,7 @@ function App() {
               <Route path="/create" element={<CreatePost />} />
             </Route>
 
+            {/* get user all posts */}
             <Route
               path="/user/posts"
               element={<PrivateRoute isUserAuth={isUserAuth} />}

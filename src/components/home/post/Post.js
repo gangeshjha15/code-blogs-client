@@ -21,6 +21,10 @@ const Container = styled(Box)`
   & > p{
     padding: 0 5px 5px 5px;
   }
+  transition: transform 0.2s ease-in-out;
+  &:hover{
+    transform: scale(1.08);
+  }
 `;
 
 
